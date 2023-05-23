@@ -1,10 +1,10 @@
 from flask import Flask
 import numpy as np
-from flask_cors import CORS
+# from flask_cors import CORS
 import json
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 
 @app.route('/')
