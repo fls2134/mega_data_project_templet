@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    <base href="/" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Website</title>
@@ -26,9 +27,15 @@
       </select>
     </div>
     <hr />
-    <div style="width: 500px; height: 500px">
+    <div style="width: 35%">
       <canvas id="myChart"></canvas>
     </div>
+    <hr />
+    <form id="form">
+      <input id="username" type="text" />
+      <input id="password" type="password" />
+      <button type="submit">Submit</button>
+    </form>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
@@ -63,6 +70,27 @@
           myChart.update();
         });
     }
+
+    const form = document.getElementById("form");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      let formData = new FormData();
+
+      let username = document.getElementById("username").value;
+      let password = document.getElementById("password").value;
+
+      formData.append("username", username);
+      formData.append("password", password);
+
+      fetch("http://localhost:5000/test", {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    });
   </script>
   <style></style>
 </html>

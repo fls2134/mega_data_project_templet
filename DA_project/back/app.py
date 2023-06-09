@@ -1,10 +1,10 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 import numpy as np
-# from flask_cors import CORS
+from flask_cors import CORS
 import json
 
 app = Flask(__name__)
-# CORS(app)
+CORS(app)
 
 
 @app.route('/')
@@ -23,6 +23,13 @@ def main():
     }
     res = json.dumps(l)
     return res
+
+
+@app.route('/test', methods=['POST', 'GET'])
+def test():
+    username = request.form['username']
+    password = request.form['password']
+    return jsonify({'username': username, 'password': password})
 
 
 if __name__ == '__main__':
